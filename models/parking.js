@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const parkingSchema = new Schema({
     renter: mongoose.Schema.Types.ObjectId,
+    renterName: String,
     location: String,
     district: String,
     image: String,
