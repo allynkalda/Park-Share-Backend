@@ -8,6 +8,7 @@ const userSchema = new Schema({
   contact: Number,
   username: String,
   password: String,
+  image: String
 }, {
   timestamps: {
     createdAt: 'created_at',
