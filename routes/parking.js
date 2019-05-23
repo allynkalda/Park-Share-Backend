@@ -1,7 +1,6 @@
 const express = require('express');
 const parking = express.Router();
-const bcrypt = require('bcrypt');
-const Parking = require('../models/parking');
+const Parking = require('../models/Parking');
 
 /* GET find parking page.*/
 parking.get('/findparking', function (req, res, next) {
