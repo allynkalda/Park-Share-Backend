@@ -3,10 +3,25 @@ const parking = express.Router();
 const bcrypt = require('bcrypt');
 const Parking = require('../models/parking');
 
-/* GET rent parking page.*/
+/* GET find parking page.*/
 parking.get('/findparking', function (req, res, next) {
     Parking.find()
         .then((data) => {
+            res.json(data)
+        })
+        .catch((err) => {
+            res
+                .status(500)
+                .json(err)
+        })
+})
+
+/* GET find parking details. */
+parking.get('/findparking/:id', (req, res, next) => {
+    const id = req.params.id
+    Parking.findById(id)
+        .then((data) => {
+            console.log(data)
             res.json(data)
         })
         .catch((err) => {
@@ -28,5 +43,7 @@ parking.post('/rentparking', function (req, res, next) {
         return res.status(200).json(parking);
     })
 })
+
+
 
 module.exports = parking;
