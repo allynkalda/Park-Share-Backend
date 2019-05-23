@@ -5,7 +5,8 @@ const Parking = require('../models/parking');
 
 /* GET find parking page.*/
 parking.get('/findparking', function (req, res, next) {
-    Parking.find()
+    const renter = req.session.currentUser._id
+    Parking.find({'renter': {$ne: renter} })
         .then((data) => {
             res.json(data)
         })
