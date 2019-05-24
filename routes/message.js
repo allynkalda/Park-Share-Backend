@@ -4,11 +4,8 @@ const Message = require('../models/Message');
 
 // show the messages to the user
 message.get('/mymessages', (req, res, next) => {
-
-console.log(req.session.currentUser)
-    // const receiver = req.session.currentUser._id
-    // console.log(req.session.currentUser._id) { 'sendTo': receiver }
-    Message.find()
+    const receiver = req.session.currentUser._id
+    Message.find({ 'sendTo': receiver })
     .then((data) => {
         res.json(data)
     })
