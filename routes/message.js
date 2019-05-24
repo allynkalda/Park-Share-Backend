@@ -28,4 +28,17 @@ message.post('/message/:id', (req, res, next) => {
     })
 })
 
+message.get('/mymessages/:id', (req, res, next) => {
+    const id = req.params.id
+    Message.findById(id)
+        .then((data) => {
+            res.json(data)
+        })
+        .catch((err) => {
+            res
+                .status(500)
+                .json(err)
+        })
+})
+
 module.exports = message;

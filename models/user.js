@@ -8,13 +8,15 @@ const userSchema = new Schema({
   contact: Number,
   username: String,
   password: String,
-  image: String
+  image: String,
 }, {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   },
 });
+
+userSchema.index({loc: '2dsphere'});
 
 const User = mongoose.model('User', userSchema);
 

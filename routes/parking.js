@@ -3,6 +3,7 @@ const parking = express.Router();
 const parser = require('../config/cloudinary');
 const Parking = require('../models/Parking');
 
+
 /* GET find parking page.*/
 parking.get('/findparking', function (req, res, next) {
     const renter = req.session.currentUser._id
@@ -43,6 +44,19 @@ parking.post('/rentparking', function (req, res, next) {
     newParking.save().then((parking) => {
         return res.status(200).json(parking);
     })
+})
+
+/* POST location of parking */
+parking.post('/map', function (req, res, next) {
+    const { info } = req.body;
+    
+    console.log(info)
+
+    Parking.create({ "currentLoc.coordinates": info})
+        .then((info) => {
+            console.log('newParking saved', info)
+            return res.status(200).json(parking);
+        })    
 })
 
 /* Image upload for post parking. */

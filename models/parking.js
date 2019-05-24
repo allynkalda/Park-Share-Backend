@@ -8,6 +8,9 @@ const parkingSchema = new Schema({
     district: String,
     image: String,
     description: String,
+    // currentLoc:  { type: { type: String, default: "Point" }, coordinates: [ Number ]},
+    currentLoc:  { type: {type:String}, coordinates: [Number]},
+
     spaceFor: {
         type: String,
         enum: ['car', 'van', 'motorcycle'],
@@ -16,6 +19,8 @@ const parkingSchema = new Schema({
     usersInterested: [mongoose.Schema.Types.ObjectId],
     date: String
   })
+
+parkingSchema.index({loc: '2dsphere'});
 
 const Parking = mongoose.model('Parking', parkingSchema);
 
