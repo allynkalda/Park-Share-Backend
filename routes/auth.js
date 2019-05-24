@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const parser = require('../config/cloudinary');
 const User = require('../models/User');
 const { isLoggedIn, isNotLoggedIn, validationLoggin } = require('../helpers/middlewares');
 
@@ -64,13 +65,25 @@ router.post('/signup', isNotLoggedIn(), validationLoggin(), (req, res, next) => 
     })
     .catch(next);
 });
+
+router.post('/signup/image', parser.single('photo'), (req, res, next) => {
+  console.log('file upload');
+  if (!req.file) {
+    next(new Error('No file uploaded!'));
+  };
+  const image = req.file.secure_url;
+  res.json(image).status(200);
+});
+
 router.post('/logout', isLoggedIn(), (req, res, next) => {
   req.session.destroy();
   return res.status(204).send();
 });
+
 router.get('/private', isLoggedIn(), (req, res, next) => {
   res.status(200).json({
     message: 'This is a private message'
   });
 });
+
 module.exports = router;
