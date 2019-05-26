@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const messageSchema = new Schema({
     sender: mongoose.Schema.Types.ObjectId,
     sendTo: mongoose.Schema.Types.ObjectId,
-    message: String
+    message: String,
+    replies: []
   }, {
     timestamps: {
       createdAt: 'created_at',

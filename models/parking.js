@@ -8,16 +8,14 @@ const parkingSchema = new Schema({
     district: String,
     image: String,
     description: String,
-    // currentLoc:  { type: { type: String, default: "Point" }, coordinates: [ Number ]},
     currentLoc:  { type: {type:String}, coordinates: [Number]},
-
     spaceFor: {
         type: String,
         enum: ['car', 'van', 'motorcycle'],
         default: 'car'
     },
     usersInterested: [mongoose.Schema.Types.ObjectId],
-    date: String
+    date: Date
   })
 
 parkingSchema.index({loc: '2dsphere'});

@@ -33,30 +33,30 @@ parking.get('/findparking/:id', (req, res, next) => {
         })
 })
 
-/* POST rent parking page. */
-parking.post('/rentparking', function (req, res, next) {
-    const renter = req.session.currentUser._id
-    const renterName = req.session.currentUser.username
-    const { location, district, spaceFor, date, image } = req.body;
-    const newParking = new Parking({
-        renterName, renter, location, district, spaceFor, date, image });
-
-    newParking.save().then((parking) => {
-        return res.status(200).json(parking);
-    })
-})
-
 /* POST location of parking */
 parking.post('/map', function (req, res, next) {
     const { info } = req.body;
-    
+    const renter = req.session.currentUser._id
+    const renterName = req.session.currentUser.username
+
     console.log(info)
 
-    Parking.create({ "currentLoc.coordinates": info})
+    Parking.create({ "currentLoc.coordinates": info, renter, renterName })
         .then((info) => {
             console.log('newParking saved', info)
             return res.status(200).json(parking);
         })    
+})
+
+/* POST rent parking page. */
+parking.post('/rentparking', function (req, res, next) {
+    const id = req.session.currentUser._id
+    const { location, district, spaceFor, date, image } = req.body;
+
+    Parking.findOneAndUpdate({ 'renter': id }, { location, district, spaceFor, date, image })
+        .then((parking) => {
+        return res.status(200).json(parking);
+    })
 })
 
 /* Image upload for post parking. */
