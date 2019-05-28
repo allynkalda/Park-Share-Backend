@@ -33,13 +33,19 @@ parking.get('/findparking/:id', (req, res, next) => {
         })
 })
 
+/* GET location of parking. */
+parking.get('/map', function (req, res, next) {
+    Parking.find()
+    .then((data)=>{
+        res.status(200).send(data)
+    })
+})
+
 /* POST location of parking */
 parking.post('/map', function (req, res, next) {
     const { info } = req.body;
     const renter = req.session.currentUser._id
     const renterName = req.session.currentUser.username
-
-    console.log(info)
 
     Parking.create({ "currentLoc.coordinates": info, renter, renterName })
         .then((info) => {
