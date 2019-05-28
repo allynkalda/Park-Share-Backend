@@ -20,8 +20,8 @@ message.get('/mymessages', (req, res, next) => {
 message.post('/message/:id', (req, res, next) => {
     const sender = req.session.currentUser._id
     const sendTo = req.params.id
-    const { message } = req.body
-    const newMessage = new Message( { sender, sendTo, message })
+    const { message, senderName } = req.body
+    const newMessage = new Message( { sender, senderName, sendTo, message })
 
     newMessage.save().then((data) => {
         return res.status(200).json(data);
