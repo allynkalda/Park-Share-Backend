@@ -1,7 +1,7 @@
 const express = require('express');
 const parking = express.Router();
 const parser = require('../config/cloudinary');
-const Parking = require('../models/Parking');
+const Parking = require('../models/parking');
 
 
 /* GET find parking page.*/

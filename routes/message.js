@@ -1,6 +1,6 @@
 const express = require('express');
 const message = express.Router();
-const Message = require('../models/Message');
+const Message = require('../models/message');
 
 // show the messages to the user
 message.get('/mymessages', (req, res, next) => {
