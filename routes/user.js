@@ -1,6 +1,6 @@
 const express = require('express');
 const user = express.Router();
-const User = require('../models/User');
+const User = require('../models/user');
 
 /* GET find user's data.*/
 user.get('/profile', (req, res, next)=>{

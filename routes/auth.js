@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const parser = require('../config/cloudinary');
-const User = require('../models/User');
+const User = require('../models/user');
 const { isLoggedIn, isNotLoggedIn, validationLoggin } = require('../helpers/middlewares');
 
 router.get('/me', isLoggedIn(), (req, res, next) => {
