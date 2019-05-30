@@ -57,9 +57,9 @@ parking.post('/map', function (req, res, next) {
 /* POST rent parking page. */
 parking.post('/rentparking', function (req, res, next) {
     const id = req.session.currentUser._id
-    const { location, district, spaceFor, date, image } = req.body;
+    const { location, district, spaceFor, date, image, description } = req.body;
 
-    Parking.findOneAndUpdate({ 'renter': id }, { location, district, spaceFor, date, image })
+    Parking.findOneAndUpdate({ 'renter': id }, { location, district, spaceFor, date, image, description })
         .then((parking) => {
         return res.status(200).json(parking);
     })
@@ -97,9 +97,9 @@ parking.post('/myparkingedit', function (req, res, next) {
 })
 
 /* POST delete my parking page. */
-parking.delete('/myparkingdelete', function (req, res, next) {
+parking.delete('/myparking', function (req, res, next) {
     const id = req.session.currentUser._id
-    Parking.find({ 'renter': id })
+    Parking.findOneAndDelete({ 'renter': id })
         .then((deleted) => {
             console.log(deleted)
         return res.status(200).json(deleted);

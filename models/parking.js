@@ -14,6 +14,7 @@ const parkingSchema = new Schema({
         enum: ['car', 'van', 'motorcycle'],
         default: 'car'
     },
+    date: Date,
     usersInterested: [mongoose.Schema.Types.ObjectId],
   })
 
