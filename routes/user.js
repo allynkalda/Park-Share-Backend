@@ -4,7 +4,6 @@ const User = require('../models/user');
 
 /* GET find user's data.*/
 user.get('/profile', (req, res, next)=>{
-    console.log(req.session.currentUser._id)
     const user = req.session.currentUser._id
     User.findById(user)
         .then((data)=>{

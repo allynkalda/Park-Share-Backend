@@ -75,5 +75,35 @@ parking.post('/rentparking/image', parser.single('photo'), (req, res, next) => {
     res.json(image).status(200);
   });
 
+  /* GET find user's parking data.*/
+parking.get('/myparking', (req, res, next)=>{
+    const user = req.session.currentUser._id
+    console.log(user)
+    Parking.find({ 'renter': user })
+        .then((data)=>{
+            res.status(200).send(data)
+        })
+})
+
+/* POST edit my parking page. */
+parking.post('/myparkingedit', function (req, res, next) {
+    const id = req.session.currentUser._id
+    const { location, district, spaceFor, date, description } = req.body;
+    Parking.findOneAndUpdate({ 'renter': id }, { location, district, spaceFor, date, description })
+        .then((parking) => {
+            console.log(parking)
+        return res.status(200).json(parking);
+    })
+})
+
+/* POST delete my parking page. */
+parking.delete('/myparkingdelete', function (req, res, next) {
+    const id = req.session.currentUser._id
+    Parking.find({ 'renter': id })
+        .then((deleted) => {
+            console.log(deleted)
+        return res.status(200).json(deleted);
+    })
+})
 
 module.exports = parking;
