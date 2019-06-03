@@ -23,7 +23,6 @@ parking.get('/findparking/:id', (req, res, next) => {
     const id = req.params.id
     Parking.findById(id)
         .then((data) => {
-            console.log(data)
             res.json(data)
         })
         .catch((err) => {
@@ -36,9 +35,9 @@ parking.get('/findparking/:id', (req, res, next) => {
 /* GET location of parking. */
 parking.get('/map', function (req, res, next) {
     Parking.find()
-    .then((data)=>{
-        res.status(200).send(data)
-    })
+        .then((data) => {
+            res.status(200).send(data)
+        })
 })
 
 /* POST location of parking */
@@ -46,10 +45,8 @@ parking.post('/map', function (req, res, next) {
     const { info } = req.body;
     const renter = req.session.currentUser._id
     const renterName = req.session.currentUser.username
-
     Parking.create({ "currentLoc.coordinates": info, renter, renterName })
         .then((info) => {
-            console.log('newParking saved', info)
             return res.status(200).json(parking);
         })    
 })
@@ -67,7 +64,6 @@ parking.post('/rentparking', function (req, res, next) {
 
 /* Image upload for post parking. */
 parking.post('/rentparking/image', parser.single('photo'), (req, res, next) => {
-    console.log('file upload');
     if (!req.file) {
       next(new Error('No file uploaded!'));
     };
@@ -76,9 +72,8 @@ parking.post('/rentparking/image', parser.single('photo'), (req, res, next) => {
   });
 
   /* GET find user's parking data.*/
-parking.get('/myparking', (req, res, next)=>{
+parking.get('/myparking', (req, res, next) => {
     const user = req.session.currentUser._id
-    console.log(user)
     Parking.find({ 'renter': user })
         .then((data)=>{
             res.status(200).send(data)
@@ -91,7 +86,6 @@ parking.post('/myparkingedit', function (req, res, next) {
     const { location, district, spaceFor, date, description } = req.body;
     Parking.findOneAndUpdate({ 'renter': id }, { location, district, spaceFor, date, description })
         .then((parking) => {
-            console.log(parking)
         return res.status(200).json(parking);
     })
 })
@@ -101,7 +95,6 @@ parking.delete('/myparking', function (req, res, next) {
     const id = req.session.currentUser._id
     Parking.findOneAndDelete({ 'renter': id })
         .then((deleted) => {
-            console.log(deleted)
         return res.status(200).json(deleted);
     })
 })

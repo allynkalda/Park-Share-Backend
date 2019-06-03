@@ -23,8 +23,10 @@ message.post('/message/:id', (req, res, next) => {
     const { message, senderName } = req.body
     const newMessage = new Message( { sender, senderName, sendTo, message })
 
-    newMessage.save().then((data) => {
-        return res.status(200).json(data);
+    newMessage.save()
+        .then((data) => {
+        return res
+        .status(200).json(data);
     })
 })
 

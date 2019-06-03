@@ -15,7 +15,6 @@ const parkingSchema = new Schema({
         default: 'car'
     },
     date: Date,
-    usersInterested: [mongoose.Schema.Types.ObjectId],
   })
 
 parkingSchema.index({loc: '2dsphere'});
