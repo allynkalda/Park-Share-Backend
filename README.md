@@ -150,5 +150,5 @@ npm run dev
 Backend: https://github.com/allynkalda/Park-Share-Backend</br>
 Trello: https://trello.com/b/PVF9NL0F/park-share-app-project</br>
 Slides: <a href="https://drive.google.com/open?id=1sWxuFSNB_YxhaRW1ekSc9qbvpFBxCCOs0QhjMow-Et0">Google Presentation</a></br>
-Deployed version: https://recipease-ironhack.herokuapp.com/</br>
+Deployed version: https://park-share-app-allyn.herokuapp.com/
 
