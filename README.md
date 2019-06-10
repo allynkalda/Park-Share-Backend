@@ -132,12 +132,15 @@ In the command line, for both repos, enter:
 ```
 npm install
 ```
+
 **To start**
+
 On the frontend:
 ```
 npm start
 ```
-On the frontend:
+
+On the backend:
 ```
 npm run dev
 ```
